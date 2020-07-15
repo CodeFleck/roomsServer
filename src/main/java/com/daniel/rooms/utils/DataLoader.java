@@ -30,28 +30,33 @@ public class DataLoader implements ApplicationRunner {
     }
 
     public void run(ApplicationArguments args) {
-        if(!roleRepository.findByName(ERole.ROLE_USER).isPresent()){
-            roleRepository.save(new Role(ERole.ROLE_USER));
-            roleRepository.save(new Role(ERole.ROLE_ADMIN));
-            roleRepository.save(new Role(ERole.ROLE_MODERATOR));
-            roleRepository.flush();
+        createUsers();
+    }
+
+    private void createUsers() {
+        if (!userRepository.findByUsername("user").isPresent()){
+            User user = new User("user", "user@gmail.com", encoder.encode("user"));
+            Set<Role> roles = new HashSet<>();
+            roles.add(new Role(ERole.ROLE_USER));
+            user.setRoles(roles);
+            userRepository.save(user);
+        }
+        if (!userRepository.findByUsername("moderator").isPresent()){
+            User user = new User("moderator", "moderator@gmail.com", encoder.encode("moderator"));
+            Set<Role> roles = new HashSet<>();
+            roles.add(new Role(ERole.ROLE_MODERATOR));
+            roles.add(new Role(ERole.ROLE_USER));
+            user.setRoles(roles);
+            userRepository.save(user);
         }
         if (!userRepository.findByUsername("admin").isPresent()){
             User user = new User("admin", "admin@gmail.com", encoder.encode("admin"));
             Set<Role> roles = new HashSet<>();
             roles.add(new Role(ERole.ROLE_ADMIN));
             roles.add(new Role(ERole.ROLE_MODERATOR));
+            roles.add(new Role(ERole.ROLE_USER));
             user.setRoles(roles);
             userRepository.save(user);
-            userRepository.flush();
-        };
-        if (!userRepository.findByUsername("moderator").isPresent()){
-            User user = new User("moderator", "moderator@gmail.com", encoder.encode("moderator"));
-            Set<Role> roles = new HashSet<>();
-            roles.add(new Role(ERole.ROLE_MODERATOR));
-            user.setRoles(roles);
-            userRepository.save(user);
-            userRepository.flush();
-        };
+        }
     }
 }
