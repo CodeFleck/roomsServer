@@ -1,20 +1,55 @@
 package com.daniel.rooms.model;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 
-@EntityScan
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.time.LocalTime;
+import java.util.HashSet;
+import java.util.Set;
+
+@Entity
+@Table(	name = "professional")
 public class Professional {
 
-    private String name;
-    private String description;
-    private double price;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long professionalid;
 
-    public Professional() {
+    @NotBlank
+    @Size(max = 40)
+    private String name;
+
+    @NotNull
+    private LocalTime beginat;
+
+    @NotNull
+    private LocalTime endat;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable( name = "professional_dayofweek",
+        joinColumns = @JoinColumn(name = "professional_id"),
+        inverseJoinColumns = @JoinColumn(name = "dayoffweek_id"))
+    private Set<DayOfWeek> dayofweekset = new HashSet<>();
+
+    private boolean requiresSpecialtyRoom;
+
+    public Professional() { }
+
+    public Professional(String name, LocalTime beginAt, LocalTime endat, Set<DayOfWeek> dayofweekset, boolean requiresSpecialtyRoom) {
+        this.name = name;
+        this.beginat = beginAt;
+        this.endat = endat;
+        this.dayofweekset = dayofweekset;
+        this.requiresSpecialtyRoom = requiresSpecialtyRoom;
     }
 
-    public Professional(String name, String description, double price) {
-        this.name = name;
-        this.description = description;
-        this.price = price;
+    public Long getProfessionalid() {
+        return professionalid;
+    }
+
+    public void setProfessionalid(Long professionalid) {
+        this.professionalid = professionalid;
     }
 
     public String getName() {
@@ -25,19 +60,47 @@ public class Professional {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public LocalTime getBeginat() {
+        return beginat;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setBeginat(LocalTime beginat) {
+        this.beginat = beginat;
     }
 
-    public double getPrice() {
-        return price;
+    public LocalTime getEndat() {
+        return endat;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setEndat(LocalTime endat) {
+        this.endat = endat;
+    }
+
+    public Set<DayOfWeek> getDayofweekset() {
+        return dayofweekset;
+    }
+
+    public void setDayofweekset(Set<DayOfWeek> dayOfWeekSet) {
+        this.dayofweekset = dayOfWeekSet;
+    }
+
+    public boolean isRequiresSpecialtyRoom() {
+        return requiresSpecialtyRoom;
+    }
+
+    public void setRequiresSpecialtyRoom(boolean requiresSpecialtyRoom) {
+        this.requiresSpecialtyRoom = requiresSpecialtyRoom;
+    }
+
+    @Override
+    public String toString() {
+        return "Professional{" +
+                "professionalid=" + professionalid +
+                ", name='" + name + '\'' +
+                ", beginat=" + beginat +
+                ", endat=" + endat +
+                ", dayOfWeekSet=" + dayofweekset +
+                ", requiresSpecialtyRoom=" + requiresSpecialtyRoom +
+                '}';
     }
 }
