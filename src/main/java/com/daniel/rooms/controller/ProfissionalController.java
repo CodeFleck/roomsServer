@@ -22,7 +22,7 @@ public class ProfissionalController {
 
     @GetMapping("/")
     public ResponseEntity getProfessionals() {
-        return ResponseEntity.ok(professionalService.getProfessionals());
+        return ResponseEntity.ok(professionalService.findAll());
     }
 
 }

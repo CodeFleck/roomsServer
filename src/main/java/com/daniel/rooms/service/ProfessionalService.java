@@ -1,25 +1,45 @@
 package com.daniel.rooms.service;
 
 import com.daniel.rooms.model.Professional;
-import com.daniel.rooms.repository.ProfessionalDao;
+import com.daniel.rooms.repository.ProfessionalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProfessionalService {
 
-    @Autowired
-    ProfessionalDao professionalDao;
+    private ProfessionalRepository professionalRepository;
 
-    public List<Professional> getProfessionals() {
-        List<Professional> listOfProfessionals = professionalDao.getAllProfessionals();
-        return listOfProfessionals;
+    @Autowired
+    public void setProfessionalRepository(ProfessionalRepository professionalRepository) {
+        this.professionalRepository = professionalRepository;
     }
 
-    public Professional getProfessional(String professionalName) {
-        Professional professional = professionalDao.getProfessional(professionalName);
-        return professional;
+    public List<Professional> findAll() {
+        List<Professional> professionals = professionalRepository.findAll();
+        return professionals;
+    }
+
+    public Optional<Professional> findById(Long professionalId) {
+        return professionalRepository.findById(professionalId);
+    }
+
+    public Optional<Professional> findByName(String professionalName) {
+        return professionalRepository.findByName(professionalName);
+    }
+
+    public Professional save(Professional professional) {
+        return professionalRepository.save(professional);
+    }
+
+    public void delete(Professional professional) {
+        professionalRepository.delete(professional);
+    }
+
+    public void deleteById(Long id) {
+        professionalRepository.deleteById(id);
     }
 }
