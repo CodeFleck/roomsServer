@@ -28,7 +28,7 @@ public class RoomService {
     }
 
     public Optional<Room> findByName(String roomName) {
-        return roomRepository.findByName(roomName);
+        return roomRepository.findByRoomname(roomName);
     }
 
     public Room save(Room room) {
