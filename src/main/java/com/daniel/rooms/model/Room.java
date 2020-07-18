@@ -78,11 +78,11 @@ public class Room {
         this.closeat = closeAt;
     }
 
-    public boolean isIsspecialtyroom() {
+    public boolean isSpecialtyRoom() {
         return isspecialtyroom;
     }
 
-    public void setIsspecialtyroom(boolean isspecialtyroom) {
+    public void setIsSpecialtyRoom(boolean isspecialtyroom) {
         this.isspecialtyroom = isspecialtyroom;
     }
 
