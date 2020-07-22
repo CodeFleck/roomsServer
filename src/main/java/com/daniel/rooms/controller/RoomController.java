@@ -46,11 +46,11 @@ public class RoomController {
 
         return roomService.findById(id)
                 .map(room -> {
-                    room.setRoomname(newRoom.getRoomname());
-                    room.setOpenat(newRoom.getOpenat());
-                    room.setCloseat(newRoom.getCloseat());
-                    room.setIsSpecialtyRoom(newRoom.isSpecialtyRoom());
-                    room.setUnitid(newRoom.getUnitid());
+                    room.setRoomName(newRoom.getRoomName());
+                    room.setOpenAt(newRoom.getOpenAt());
+                    room.setCloseAt(newRoom.getCloseAt());
+                    room.setSpecialtyRoom(newRoom.isSpecialtyRoom());
+                    room.setUnit(newRoom.getUnit());
                     return roomService.save(room);
                 })
                 .orElseGet(() -> {

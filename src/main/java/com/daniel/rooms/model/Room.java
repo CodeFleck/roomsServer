@@ -11,90 +11,103 @@ public class Room {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long roomid;
+    private Long id;
 
     @NotBlank
-    private String roomname;
+    private String roomName;
 
     @NotBlank
-    private Long unitid;
+    private String unit;
 
     @NotNull
-    private LocalTime openat;
+    private LocalTime openAt;
 
     @NotNull
-    private LocalTime closeat;
+    private LocalTime closeAt;
 
     @NotNull
-    private boolean isspecialtyroom;
+    private boolean specialtyRoom;
+
+    @OneToOne(mappedBy = "room")
+    private Professional professional;
 
     public Room() { }
 
-    public Room(String roomName, Long unitid, LocalTime openAt, LocalTime closeAt, boolean isSpecialtyRoom) {
-        this.roomname = roomName;
-        this.unitid = unitid;
-        this.openat = openAt;
-        this.closeat = closeAt;
-        this.isspecialtyroom = isSpecialtyRoom;
+    public Room(String roomName, String unit, LocalTime openAt, LocalTime closeAt, boolean specialtyRoom, Professional professional) {
+        this.roomName = roomName;
+        this.unit = unit;
+        this.openAt = openAt;
+        this.closeAt = closeAt;
+        this.specialtyRoom = specialtyRoom;
+        this.professional = professional;
     }
 
-    public Long getRoomid() {
-        return roomid;
+    public Long getId() {
+        return id;
     }
 
-    public void setRoomid(Long roomId) {
-        this.roomid = roomId;
+    public void setId(Long roomId) {
+        this.id = roomId;
     }
 
-    public String getRoomname() {
-        return roomname;
+    public String getRoomName() {
+        return roomName;
     }
 
-    public void setRoomname(String roomName) {
-        this.roomname = roomName;
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
     }
 
-    public Long getUnitid() {
-        return unitid;
+    public String getUnit() {
+        return unit;
     }
 
-    public void setUnitid(Long unitId) {
-        this.unitid = unitId;
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 
-    public LocalTime getOpenat() {
-        return openat;
+    public LocalTime getOpenAt() {
+        return openAt;
     }
 
-    public void setOpenat(LocalTime openAt) {
-        this.openat = openAt;
+    public void setOpenAt(LocalTime openAt) {
+        this.openAt = openAt;
     }
 
-    public LocalTime getCloseat() {
-        return closeat;
+    public LocalTime getCloseAt() {
+        return closeAt;
     }
 
-    public void setCloseat(LocalTime closeAt) {
-        this.closeat = closeAt;
+    public void setCloseAt(LocalTime closeAt) {
+        this.closeAt = closeAt;
+    }
+
+    public Professional getProfessional() {
+        return professional;
+    }
+
+    public void setProfessional(Professional professional) {
+        this.professional = professional;
     }
 
     public boolean isSpecialtyRoom() {
-        return isspecialtyroom;
+        return specialtyRoom;
     }
 
-    public void setIsSpecialtyRoom(boolean isspecialtyroom) {
-        this.isspecialtyroom = isspecialtyroom;
+    public void setSpecialtyRoom(boolean specialtyRoom) {
+        this.specialtyRoom = specialtyRoom;
     }
 
     @Override
     public String toString() {
         return "Room{" +
-                "roomId=" + roomid +
-                ", roomName='" + roomname + '\'' +
-                ", unitId=" + unitid +
-                ", openAt=" + openat +
-                ", closeAt=" + closeat +
-                ", isSpecialtyRoom=" + isspecialtyroom +
+                "id=" + id +
+                ", roomName='" + roomName + '\'' +
+                ", unit='" + unit + '\'' +
+                ", openAt=" + openAt +
+                ", closeAt=" + closeAt +
+                ", specialtyRoom=" + specialtyRoom +
+                ", professional=" + professional +
                 '}';
     }
 }

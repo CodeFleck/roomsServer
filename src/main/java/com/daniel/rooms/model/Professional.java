@@ -5,8 +5,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalTime;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(	name = "professional")
@@ -14,7 +13,7 @@ public class Professional {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long professionalid;
+    private Long id;
 
     @NotBlank
     @Size(max = 40)
@@ -26,30 +25,33 @@ public class Professional {
     @NotNull
     private LocalTime endat;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable( name = "professional_dayofweek",
-        joinColumns = @JoinColumn(name = "professional_id"),
-        inverseJoinColumns = @JoinColumn(name = "dayoffweek_id"))
-    private Set<DayOfWeek> dayofweekset = new HashSet<>();
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinTable( name = "professional_room",
+        joinColumns = { @JoinColumn(name = "professional_id", referencedColumnName = "id") },
+        inverseJoinColumns = { @JoinColumn(name = "room_id", referencedColumnName = "id") })
+    private Room room;
+
+    @ElementCollection
+    private List<String> dayofweekList;
 
     private boolean requiresSpecialtyRoom;
 
     public Professional() { }
 
-    public Professional(String name, LocalTime beginAt, LocalTime endat, Set<DayOfWeek> dayofweekset, boolean requiresSpecialtyRoom) {
+    public Professional(String name, LocalTime beginAt, LocalTime endat, List<String> daysOfWeek, boolean requiresSpecialtyRoom) {
         this.name = name;
         this.beginat = beginAt;
         this.endat = endat;
-        this.dayofweekset = dayofweekset;
+        this.dayofweekList = daysOfWeek;
         this.requiresSpecialtyRoom = requiresSpecialtyRoom;
     }
 
-    public Long getProfessionalid() {
-        return professionalid;
+    public Long getId() {
+        return id;
     }
 
-    public void setProfessionalid(Long professionalid) {
-        this.professionalid = professionalid;
+    public void setId(Long professionalid) {
+        this.id = professionalid;
     }
 
     public String getName() {
@@ -76,12 +78,12 @@ public class Professional {
         this.endat = endat;
     }
 
-    public Set<DayOfWeek> getDayofweekset() {
-        return dayofweekset;
+    public List<String> getDayofweekList() {
+        return dayofweekList;
     }
 
-    public void setDayofweekset(Set<DayOfWeek> dayOfWeekSet) {
-        this.dayofweekset = dayOfWeekSet;
+    public void setDayofweekList(List<String> dayofweekList) {
+        this.dayofweekList = dayofweekList;
     }
 
     public boolean isRequiresSpecialtyRoom() {
@@ -92,14 +94,23 @@ public class Professional {
         this.requiresSpecialtyRoom = requiresSpecialtyRoom;
     }
 
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
     @Override
     public String toString() {
         return "Professional{" +
-                "professionalid=" + professionalid +
+                "professionalid=" + id +
                 ", name='" + name + '\'' +
                 ", beginat=" + beginat +
                 ", endat=" + endat +
-                ", dayOfWeekSet=" + dayofweekset +
+                ", room=" + room +
+                ", dayofweekList=" + dayofweekList +
                 ", requiresSpecialtyRoom=" + requiresSpecialtyRoom +
                 '}';
     }

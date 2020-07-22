@@ -49,7 +49,7 @@ public class ProfissionalController {
                     professional.setName(newProfessional.getName());
                     professional.setBeginat(newProfessional.getBeginat());
                     professional.setEndat(newProfessional.getEndat());
-                    professional.setDayofweekset(newProfessional.getDayofweekset());
+                    professional.setDayofweekList(newProfessional.getDayofweekList());
                     professional.setRequiresSpecialtyRoom(newProfessional.isRequiresSpecialtyRoom());
                     return professionalService.save(professional);
                 })
