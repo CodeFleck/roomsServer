@@ -2,6 +2,7 @@ package com.daniel.rooms.service;
 
 import com.daniel.rooms.model.Professional;
 import com.daniel.rooms.repository.ProfessionalRepository;
+import com.daniel.rooms.utils.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +33,8 @@ public class ProfessionalService {
     }
 
     public Professional save(Professional professional) {
+        professional.setBeginat(TimeUtil.getTimeFromDate(professional.getBeginat()));
+        professional.setEndat(TimeUtil.getTimeFromDate(professional.getEndat()));
         return professionalRepository.save(professional);
     }
 

@@ -1,9 +1,9 @@
 package com.daniel.rooms.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -15,15 +15,14 @@ public class Professional {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @NotNull
     @Size(max = 40)
     private String name;
 
     @NotNull
-    private LocalTime beginat;
+    private String beginat;
 
-    @NotNull
-    private LocalTime endat;
+    private String endat;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinTable( name = "professional_room",
@@ -38,7 +37,7 @@ public class Professional {
 
     public Professional() { }
 
-    public Professional(String name, LocalTime beginAt, LocalTime endat, List<String> daysOfWeek, boolean requiresSpecialtyRoom) {
+    public Professional(String name, String beginAt, String endat, List<String> daysOfWeek, boolean requiresSpecialtyRoom) {
         this.name = name;
         this.beginat = beginAt;
         this.endat = endat;
@@ -62,19 +61,19 @@ public class Professional {
         this.name = name;
     }
 
-    public LocalTime getBeginat() {
+    public String getBeginat() {
         return beginat;
     }
 
-    public void setBeginat(LocalTime beginat) {
+    public void setBeginat(String beginat) {
         this.beginat = beginat;
     }
 
-    public LocalTime getEndat() {
+    public String getEndat() {
         return endat;
     }
 
-    public void setEndat(LocalTime endat) {
+    public void setEndat(String endat) {
         this.endat = endat;
     }
 

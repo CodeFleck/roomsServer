@@ -5,7 +5,9 @@ import com.daniel.rooms.service.ProfessionalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -25,7 +27,7 @@ public class ProfissionalController {
     }
 
     @PostMapping("/")
-    public Professional newProfessional(@RequestBody Professional professional) {
+    public Professional newProfessional(@Valid @RequestBody Professional professional) {
         return professionalService.save(professional);
     }
 
@@ -59,7 +61,11 @@ public class ProfissionalController {
     }
 
     @DeleteMapping("/{id}")
-    void deleteProfessional(@PathVariable Long id) {
-        professionalService.deleteById(id);
+    void deleteProfessional(@PathVariable Long id) throws Exception {
+        Optional<Professional> professional = Optional.of(professionalService.findById(id))
+                .orElseThrow(() -> new RuntimeException("Could not find any Professional with id " + id));
+        if (professional.isPresent()) {
+            professionalService.delete(professional.get());
+        }
     }
 }

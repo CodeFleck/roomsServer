@@ -10,7 +10,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -42,8 +42,8 @@ public class DataLoader implements ApplicationRunner {
         if(professionalRepository.findAll().isEmpty()) {
             Professional professional1 = new Professional();
             professional1.setName("Daniel Fleck");
-            professional1.setBeginat(LocalTime.of(8,0));
-            professional1.setEndat(LocalTime.of(6,0));
+            professional1.setBeginat("08:00");
+            professional1.setEndat("13:00");
             List<String> daysOfWeekList = new ArrayList<>();
             daysOfWeekList.add(EDaysOfWeek.MONDAY.toString());
             daysOfWeekList.add(EDaysOfWeek.WEDNESDAY.toString());
@@ -52,16 +52,16 @@ public class DataLoader implements ApplicationRunner {
 
             Professional professional2 = new Professional();
             professional2.setName("Bruna Fleck");
-            professional2.setBeginat(LocalTime.of(8,0));
-            professional2.setEndat(LocalTime.of(6,0));
+            professional2.setBeginat("08:00");
+            professional2.setEndat("14:00");
             daysOfWeekList.add(EDaysOfWeek.TUESDAY.toString());
             daysOfWeekList.add(EDaysOfWeek.THURSDAY.toString());
             professional2.setDayofweekList(daysOfWeekList);
 
             Professional professional3 = new Professional();
             professional3.setName("Clarisse Lisboa");
-            professional3.setBeginat(LocalTime.of(8,0));
-            professional3.setEndat(LocalTime.of(6,0));
+            professional3.setBeginat("08:00");
+            professional3.setEndat("17:00");
             daysOfWeekList.add(EDaysOfWeek.SATURDAY.toString());
             professional3.setDayofweekList(daysOfWeekList);
 
