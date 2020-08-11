@@ -28,18 +28,10 @@ public class ProfessionalService {
         return professionalRepository.findById(professionalId);
     }
 
-    public Optional<Professional> findByName(String professionalName) {
-        return professionalRepository.findByName(professionalName);
-    }
-
     public Professional save(Professional professional) {
         professional.setBeginat(TimeUtil.getTimeFromDate(professional.getBeginat()));
         professional.setEndat(TimeUtil.getTimeFromDate(professional.getEndat()));
         return professionalRepository.save(professional);
-    }
-
-    public void delete(Professional professional) {
-        professionalRepository.delete(professional);
     }
 
     public void deleteById(Long id) {

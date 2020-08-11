@@ -2,12 +2,12 @@ package com.daniel.rooms.controller;
 
 import com.daniel.rooms.model.Professional;
 import com.daniel.rooms.service.ProfessionalService;
+import com.daniel.rooms.utils.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -37,20 +37,13 @@ public class ProfissionalController {
                 .orElseThrow(() -> new RuntimeException("Could not find any Professional with id " + id));
     }
 
-    @GetMapping("/{name}")
-    public Professional findByName(@PathVariable String name) {
-        return professionalService.findByName(name)
-                .orElseThrow(() -> new RuntimeException("Could not find any Professional with the name " + name));
-    }
-
     @PutMapping("/{id}")
     public Professional replaceProfessional(@RequestBody Professional newProfessional, @PathVariable Long id) {
-
         return professionalService.findById(id)
                 .map(professional -> {
                     professional.setName(newProfessional.getName());
-                    professional.setBeginat(newProfessional.getBeginat());
-                    professional.setEndat(newProfessional.getEndat());
+                    professional.setBeginat(TimeUtil.getTimeFromDate(newProfessional.getBeginat()));
+                    professional.setEndat(TimeUtil.getTimeFromDate(newProfessional.getEndat()));
                     professional.setDayofweekList(newProfessional.getDayofweekList());
                     professional.setRequiresSpecialtyRoom(newProfessional.isRequiresSpecialtyRoom());
                     return professionalService.save(professional);
@@ -61,11 +54,7 @@ public class ProfissionalController {
     }
 
     @DeleteMapping("/{id}")
-    void deleteProfessional(@PathVariable Long id) throws Exception {
-        Optional<Professional> professional = Optional.of(professionalService.findById(id))
-                .orElseThrow(() -> new RuntimeException("Could not find any Professional with id " + id));
-        if (professional.isPresent()) {
-            professionalService.delete(professional.get());
-        }
+    public void deleteProfessional(@PathVariable Long id) {
+        professionalService.deleteById(id);
     }
 }

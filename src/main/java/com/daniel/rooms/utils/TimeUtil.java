@@ -6,7 +6,10 @@ import org.springframework.stereotype.Component;
 public class TimeUtil {
 
     public static String getTimeFromDate(String date) {
-        return date.substring(16, 21);
+        if (date.length() > 5) {
+            return date.substring(16, 21);
+        } else {
+            return date;
+        }
     }
-
 }
