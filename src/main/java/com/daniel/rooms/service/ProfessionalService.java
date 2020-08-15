@@ -37,4 +37,9 @@ public class ProfessionalService {
     public void deleteById(Long id) {
         professionalRepository.deleteById(id);
     }
+
+    public Professional updateProfessional(Professional partialUpdate, Professional professional) {
+        professional.setRequiresSpecialtyRoom(partialUpdate.isRequiresSpecialtyRoom());
+        return professionalRepository.save(professional);
+    }
 }

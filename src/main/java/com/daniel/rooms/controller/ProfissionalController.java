@@ -53,6 +53,13 @@ public class ProfissionalController {
                 });
     }
 
+    @PatchMapping("/{id}")
+    public Professional updateAttribute(@RequestBody Professional partialUpdate, @PathVariable Long id) {
+        Professional professional = professionalService.findById(id)
+                .orElseThrow(() -> new RuntimeException("Could not find any Professional with id " + id));
+        return professionalService.updateProfessional(partialUpdate, professional);
+    }
+
     @DeleteMapping("/{id}")
     public void deleteProfessional(@PathVariable Long id) {
         professionalService.deleteById(id);
