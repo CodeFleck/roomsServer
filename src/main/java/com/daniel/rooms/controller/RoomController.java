@@ -1,10 +1,13 @@
 package com.daniel.rooms.controller;
 
+import com.daniel.rooms.model.Professional;
 import com.daniel.rooms.model.Room;
 import com.daniel.rooms.service.RoomService;
+import com.daniel.rooms.utils.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 @RestController
@@ -35,20 +38,14 @@ public class RoomController {
                 .orElseThrow(() -> new RuntimeException("Could not find any Room with id " + id));
     }
 
-    @GetMapping("/{name}")
-    public Room findByName(@PathVariable String name) {
-        return roomService.findByName(name)
-                .orElseThrow(() -> new RuntimeException("Could not find any Room with the name " + name));
-    }
-
     @PutMapping("/{id}")
     public Room replaceRoom(@RequestBody Room newRoom, @PathVariable Long id) {
 
         return roomService.findById(id)
                 .map(room -> {
                     room.setRoomName(newRoom.getRoomName());
-                    room.setOpenAt(newRoom.getOpenAt());
-                    room.setCloseAt(newRoom.getCloseAt());
+                    room.setOpenat(TimeUtil.getTimeFromDate(newRoom.getOpenat()));
+                    room.setCloseat(TimeUtil.getTimeFromDate(newRoom.getCloseat()));
                     room.setSpecialtyRoom(newRoom.isSpecialtyRoom());
                     room.setUnit(newRoom.getUnit());
                     return roomService.save(room);
@@ -56,6 +53,13 @@ public class RoomController {
                 .orElseGet(() -> {
                     return roomService.save(newRoom);
                 });
+    }
+
+    @PatchMapping("/{id}")
+    public Room updateAttribute(@RequestBody Room partialUpdate, @PathVariable Long id) {
+        Room room = roomService.findById(id)
+                .orElseThrow(() -> new RuntimeException("Could not find any room with id " + id));
+        return roomService.updateRoom(partialUpdate, room);
     }
 
     @DeleteMapping("/{id}")

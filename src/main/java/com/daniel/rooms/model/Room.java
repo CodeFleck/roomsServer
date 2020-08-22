@@ -3,10 +3,8 @@ package com.daniel.rooms.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.time.LocalTime;
 
 @Entity
-@Table( name = "room")
 public class Room {
 
     @Id
@@ -20,10 +18,10 @@ public class Room {
     private String unit;
 
     @NotNull
-    private LocalTime openAt;
+    private String openat;
 
     @NotNull
-    private LocalTime closeAt;
+    private String closeat;
 
     @NotNull
     private boolean specialtyRoom;
@@ -33,11 +31,11 @@ public class Room {
 
     public Room() { }
 
-    public Room(String roomName, String unit, LocalTime openAt, LocalTime closeAt, boolean specialtyRoom, Professional professional) {
+    public Room(String roomName, String unit, String openat, String closeat, boolean specialtyRoom, Professional professional) {
         this.roomName = roomName;
         this.unit = unit;
-        this.openAt = openAt;
-        this.closeAt = closeAt;
+        this.openat = openat;
+        this.closeat = closeat;
         this.specialtyRoom = specialtyRoom;
         this.professional = professional;
     }
@@ -66,20 +64,20 @@ public class Room {
         this.unit = unit;
     }
 
-    public LocalTime getOpenAt() {
-        return openAt;
+    public String getOpenat() {
+        return openat;
     }
 
-    public void setOpenAt(LocalTime openAt) {
-        this.openAt = openAt;
+    public void setOpenat(String openAt) {
+        this.openat = openAt;
     }
 
-    public LocalTime getCloseAt() {
-        return closeAt;
+    public String getCloseat() {
+        return closeat;
     }
 
-    public void setCloseAt(LocalTime closeAt) {
-        this.closeAt = closeAt;
+    public void setCloseat(String closeAt) {
+        this.closeat = closeAt;
     }
 
     public Professional getProfessional() {
@@ -104,8 +102,8 @@ public class Room {
                 "id=" + id +
                 ", roomName='" + roomName + '\'' +
                 ", unit='" + unit + '\'' +
-                ", openAt=" + openAt +
-                ", closeAt=" + closeAt +
+                ", openAt=" + openat +
+                ", closeAt=" + closeat +
                 ", specialtyRoom=" + specialtyRoom +
                 ", professional=" + professional +
                 '}';

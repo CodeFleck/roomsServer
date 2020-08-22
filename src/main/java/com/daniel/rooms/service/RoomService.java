@@ -1,7 +1,9 @@
 package com.daniel.rooms.service;
 
+import com.daniel.rooms.model.Professional;
 import com.daniel.rooms.model.Room;
 import com.daniel.rooms.repository.RoomRepository;
+import com.daniel.rooms.utils.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,16 +29,15 @@ public class RoomService {
         return roomRepository.findById(roomId);
     }
 
-    public Optional<Room> findByName(String roomName) {
-        return roomRepository.findByRoomName(roomName);
-    }
-
     public Room save(Room room) {
+        room.setOpenat(TimeUtil.getTimeFromDate(room.getOpenat()));
+        room.setCloseat(TimeUtil.getTimeFromDate(room.getCloseat()));
         return roomRepository.save(room);
     }
 
-    public void delete(Room room) {
-        roomRepository.delete(room);
+    public Room updateRoom(Room partialUpdate, Room room) {
+        room.setSpecialtyRoom(partialUpdate.isSpecialtyRoom());
+        return roomRepository.save(room);
     }
 
     public void deleteById(Long id) {

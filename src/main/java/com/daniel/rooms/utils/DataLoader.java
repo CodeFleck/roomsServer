@@ -3,6 +3,7 @@ package com.daniel.rooms.utils;
 import com.daniel.rooms.model.*;
 import com.daniel.rooms.repository.ProfessionalRepository;
 import com.daniel.rooms.repository.RoleRepository;
+import com.daniel.rooms.repository.RoomRepository;
 import com.daniel.rooms.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -10,7 +11,6 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -22,20 +22,53 @@ public class DataLoader implements ApplicationRunner {
     private RoleRepository roleRepository;
     private UserRepository userRepository;
     private ProfessionalRepository professionalRepository;
+    private RoomRepository roomRepository;
 
     @Autowired
     PasswordEncoder encoder;
 
     @Autowired
-    public DataLoader(RoleRepository roleRepository, UserRepository userRepository, ProfessionalRepository professionalRepository) {
+    public DataLoader(RoleRepository roleRepository, UserRepository userRepository, ProfessionalRepository professionalRepository,
+                      RoomRepository roomRepository) {
         this.roleRepository = roleRepository;
         this.userRepository = userRepository;
         this.professionalRepository = professionalRepository;
+        this.roomRepository = roomRepository;
     }
 
     public void run(ApplicationArguments args) {
         createUsers();
         createProfessionals();
+        createRooms();
+    }
+
+    private void createRooms() {
+        if (roomRepository.findAll().isEmpty()) {
+            Room room = new Room();
+            room.setRoomName("sala 1");
+            room.setUnit("Viaduto");
+            room.setOpenat("07:00");
+            room.setCloseat("19:00");
+            room.setSpecialtyRoom(false);
+
+            Room room2 = new Room();
+            room2.setRoomName("sala 2");
+            room2.setUnit("Viaduto");
+            room2.setOpenat("07:00");
+            room2.setCloseat("19:00");
+            room2.setSpecialtyRoom(false);
+
+            Room room3 = new Room();
+            room3.setRoomName("sala 1");
+            room3.setUnit("Saibreira");
+            room3.setOpenat("06:00");
+            room3.setCloseat("19:00");
+            room3.setSpecialtyRoom(true);
+
+            roomRepository.save(room);
+            roomRepository.save(room2);
+            roomRepository.save(room3);
+        }
     }
 
     private void createProfessionals() {
