@@ -5,6 +5,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -30,13 +31,13 @@ public class Professional {
     private Room room;
 
     @ElementCollection
-    private List<String> dayofweekList;
+    private List<String> dayofweekList = new ArrayList<>();
 
-    private boolean requiresSpecialtyRoom;
+    private Boolean requiresSpecialtyRoom;
 
     public Professional() { }
 
-    public Professional(String name, String beginAt, String endat, List<String> daysOfWeek, boolean requiresSpecialtyRoom) {
+    public Professional(String name, String beginAt, String endat, List<String> daysOfWeek, Boolean requiresSpecialtyRoom) {
         this.name = name;
         this.beginat = beginAt;
         this.endat = endat;
@@ -84,11 +85,11 @@ public class Professional {
         this.dayofweekList = dayofweekList;
     }
 
-    public boolean isRequiresSpecialtyRoom() {
+    public Boolean isRequiresSpecialtyRoom() {
         return requiresSpecialtyRoom;
     }
 
-    public void setRequiresSpecialtyRoom(boolean requiresSpecialtyRoom) {
+    public void setRequiresSpecialtyRoom(Boolean requiresSpecialtyRoom) {
         this.requiresSpecialtyRoom = requiresSpecialtyRoom;
     }
 

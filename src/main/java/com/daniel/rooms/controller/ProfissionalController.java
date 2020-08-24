@@ -4,6 +4,8 @@ import com.daniel.rooms.model.Professional;
 import com.daniel.rooms.service.ProfessionalService;
 import com.daniel.rooms.utils.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;

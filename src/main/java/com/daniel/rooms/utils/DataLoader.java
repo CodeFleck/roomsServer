@@ -78,25 +78,27 @@ public class DataLoader implements ApplicationRunner {
             professional1.setBeginat("08:00");
             professional1.setEndat("13:00");
             List<String> daysOfWeekList = new ArrayList<>();
-            daysOfWeekList.add(EDaysOfWeek.MONDAY.toString());
-            daysOfWeekList.add(EDaysOfWeek.WEDNESDAY.toString());
-            daysOfWeekList.add(EDaysOfWeek.FRIDAY.toString());
+            daysOfWeekList.add(EDaysOfWeek.Segunda.toString());
+            daysOfWeekList.add(EDaysOfWeek.Quarta.toString());
+            daysOfWeekList.add(EDaysOfWeek.Sexta.toString());
             professional1.setDayofweekList(daysOfWeekList);
 
             Professional professional2 = new Professional();
             professional2.setName("Bruna Fleck");
             professional2.setBeginat("08:00");
             professional2.setEndat("14:00");
-            daysOfWeekList.add(EDaysOfWeek.TUESDAY.toString());
-            daysOfWeekList.add(EDaysOfWeek.THURSDAY.toString());
-            professional2.setDayofweekList(daysOfWeekList);
+            List<String> daysOfWeekList2 = new ArrayList<>();
+            daysOfWeekList2.add(EDaysOfWeek.Terça.toString());
+            daysOfWeekList2.add(EDaysOfWeek.Quinta.toString());
+            professional2.setDayofweekList(daysOfWeekList2);
 
             Professional professional3 = new Professional();
             professional3.setName("Clarisse Lisboa");
             professional3.setBeginat("08:00");
             professional3.setEndat("17:00");
-            daysOfWeekList.add(EDaysOfWeek.SATURDAY.toString());
-            professional3.setDayofweekList(daysOfWeekList);
+            List<String> daysOfWeekList3 = new ArrayList<>();
+            daysOfWeekList3.add(EDaysOfWeek.Sábado.toString());
+            professional3.setDayofweekList(daysOfWeekList3);
 
             professionalRepository.save(professional1);
             professionalRepository.save(professional2);

@@ -39,7 +39,21 @@ public class ProfessionalService {
     }
 
     public Professional updateProfessional(Professional partialUpdate, Professional professional) {
-        professional.setRequiresSpecialtyRoom(partialUpdate.isRequiresSpecialtyRoom());
+        if(partialUpdate.getName() != null) {
+            professional.setName(partialUpdate.getName());
+        }
+        if(partialUpdate.getBeginat() != null) {
+            professional.setBeginat(TimeUtil.getTimeFromDate(partialUpdate.getBeginat()));
+        }
+        if(partialUpdate.getEndat() != null) {
+            professional.setEndat(TimeUtil.getTimeFromDate(partialUpdate.getEndat()));
+        }
+        if(partialUpdate.getDayofweekList() != null) {
+            professional.setDayofweekList(partialUpdate.getDayofweekList());
+        }
+        if(partialUpdate.isRequiresSpecialtyRoom() != null) {
+            professional.setRequiresSpecialtyRoom(partialUpdate.isRequiresSpecialtyRoom());
+        }
         return professionalRepository.save(professional);
     }
 }
