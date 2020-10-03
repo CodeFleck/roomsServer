@@ -1,13 +1,11 @@
 package com.daniel.rooms.controller;
 
-import com.daniel.rooms.model.Professional;
 import com.daniel.rooms.model.Room;
 import com.daniel.rooms.service.RoomService;
 import com.daniel.rooms.utils.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.criteria.Root;
 import java.util.List;
 
 @RestController
