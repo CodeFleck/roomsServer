@@ -3,8 +3,6 @@ package com.daniel.rooms.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,16 +31,19 @@ public class Professional {
     @ElementCollection
     private List<String> dayofweekList = new ArrayList<>();
 
-    private Boolean requiresSpecialtyRoom;
+    private boolean requiresSpecialtyRoom;
+
+    private boolean isBusy;
 
     public Professional() { }
 
-    public Professional(String name, String beginAt, String endat, List<String> daysOfWeek, Boolean requiresSpecialtyRoom) {
+    public Professional(String name, String beginAt, String endat, List<String> daysOfWeek, boolean requiresSpecialtyRoom) {
         this.name = name;
         this.beginat = beginAt;
         this.endat = endat;
         this.dayofweekList = daysOfWeek;
         this.requiresSpecialtyRoom = requiresSpecialtyRoom;
+        this.isBusy = false;
     }
 
     public Long getId() {
@@ -93,6 +94,14 @@ public class Professional {
         this.requiresSpecialtyRoom = requiresSpecialtyRoom;
     }
 
+    public Boolean getIsBusy() {
+        return isBusy;
+    }
+
+    public void setIsBusy(Boolean busy) {
+        this.isBusy = busy;
+    }
+
     public Room getRoom() {
         return room;
     }
@@ -104,13 +113,14 @@ public class Professional {
     @Override
     public String toString() {
         return "Professional{" +
-                "professionalid=" + id +
+                "id=" + id +
                 ", name='" + name + '\'' +
-                ", beginat=" + beginat +
-                ", endat=" + endat +
+                ", beginat='" + beginat + '\'' +
+                ", endat='" + endat + '\'' +
                 ", room=" + room +
                 ", dayofweekList=" + dayofweekList +
                 ", requiresSpecialtyRoom=" + requiresSpecialtyRoom +
+                ", busy=" + isBusy +
                 '}';
     }
 }
