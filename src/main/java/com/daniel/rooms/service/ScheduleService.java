@@ -30,11 +30,9 @@ public class ScheduleService {
     private List<Room> generateDailySchedule(List<Room> roomList, List<Professional> professionalList) {
         if (roomList.size() <= 0 || professionalList.size() <= 0) return roomList;
 
-//        int pIndex = 0;
-
         if (roomList.size() >= professionalList.size()) {
             for (Room room : roomList) {
-                if (room.isSpecialtyRoom()) {
+                if (room.isSpecialtyRoom()) { //match specialty rooms
                     for (Professional professional : professionalList) {
                         if (professional.isRequiresSpecialtyRoom() && !professional.getIsBusy()) {
                             room.setProfessional(professional);
@@ -44,7 +42,7 @@ public class ScheduleService {
                     }
                 } else {
                     for (Professional professional : professionalList) {
-                        if (!professional.isRequiresSpecialtyRoom() && !professional.getIsBusy()){
+                        if (!professional.isRequiresSpecialtyRoom() && !professional.getIsBusy()){ //match not specialty
                             room.setProfessional(professional);
                             professional.setIsBusy(true);
                             break;
@@ -55,7 +53,7 @@ public class ScheduleService {
         }
         for (Room room : roomList) {
             if (room.getProfessional() == null) {
-                for(Professional professional : professionalList) {
+                for(Professional professional : professionalList) { //match remaining
                     if (!professional.getIsBusy()) {
                         room.setProfessional(professional);
                         professional.setIsBusy(true);
