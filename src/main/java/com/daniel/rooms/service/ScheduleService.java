@@ -44,7 +44,7 @@ public class ScheduleService {
                     }
                 } else {
                     for (Professional professional : professionalList) {
-                        if (!professional.getIsBusy()){
+                        if (!professional.isRequiresSpecialtyRoom() && !professional.getIsBusy()){
                             room.setProfessional(professional);
                             professional.setIsBusy(true);
                             break;
