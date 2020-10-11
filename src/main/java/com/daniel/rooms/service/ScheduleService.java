@@ -53,6 +53,17 @@ public class ScheduleService {
                 }
             }
         }
+        for (Room room : roomList) {
+            if (room.getProfessional() == null) {
+                for(Professional professional : professionalList) {
+                    if (!professional.getIsBusy()) {
+                        room.setProfessional(professional);
+                        professional.setIsBusy(true);
+                        break;
+                    }
+                }
+            }
+        }
         return roomList;
     }
 }
