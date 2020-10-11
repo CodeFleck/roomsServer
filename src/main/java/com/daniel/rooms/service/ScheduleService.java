@@ -10,8 +10,8 @@ import java.util.List;
 @Service
 public class ScheduleService {
 
-    private RoomService roomService;
-    private ProfessionalService professionalService;
+    private final RoomService roomService;
+    private final ProfessionalService professionalService;
 
     @Autowired
     public ScheduleService(RoomService roomService, ProfessionalService professionalService) {
@@ -30,7 +30,7 @@ public class ScheduleService {
     private List<Room> generateDailySchedule(List<Room> roomList, List<Professional> professionalList) {
         if (roomList.size() <= 0 || professionalList.size() <= 0) return roomList;
 
-        if (roomList.size() >= professionalList.size()) {
+        if (roomList.size() >= professionalList.size()) { //more rooms than professionals
             for (Room room : roomList) {
                 if (room.isSpecialtyRoom()) { //match specialty rooms
                     for (Professional professional : professionalList) {
@@ -42,7 +42,7 @@ public class ScheduleService {
                     }
                 } else {
                     for (Professional professional : professionalList) {
-                        if (!professional.isRequiresSpecialtyRoom() && !professional.getIsBusy()){ //match not specialty
+                        if (!professional.isRequiresSpecialtyRoom() && !professional.getIsBusy()) { //match not specialty
                             room.setProfessional(professional);
                             professional.setIsBusy(true);
                             break;
@@ -50,14 +50,14 @@ public class ScheduleService {
                     }
                 }
             }
-        }
-        for (Room room : roomList) {
-            if (room.getProfessional() == null) {
-                for(Professional professional : professionalList) { //match remaining
-                    if (!professional.getIsBusy()) {
-                        room.setProfessional(professional);
-                        professional.setIsBusy(true);
-                        break;
+            for (Room room : roomList) {
+                if (room.getProfessional() == null) {
+                    for (Professional professional : professionalList) { //match remaining
+                        if (!professional.getIsBusy()) {
+                            room.setProfessional(professional);
+                            professional.setIsBusy(true);
+                            break;
+                        }
                     }
                 }
             }
