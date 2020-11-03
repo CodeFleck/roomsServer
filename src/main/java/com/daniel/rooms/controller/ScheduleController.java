@@ -21,7 +21,6 @@ public class ScheduleController {
 
     @GetMapping("/{day}")
     public List<Room> generateSchedule(@PathVariable String day) {
-        System.out.println(day);
         return scheduleService.generateWeeklySchedule(day);
     }
 }

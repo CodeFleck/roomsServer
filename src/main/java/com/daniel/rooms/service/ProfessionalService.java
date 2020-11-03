@@ -38,7 +38,7 @@ public class ProfessionalService {
         professionalRepository.deleteById(id);
     }
 
-    public Professional updateProfessional(Professional partialUpdate, Professional professional) {
+    public Professional updateProfessional(Professional partialUpdate, Professional professional, String attribute) {
         if(partialUpdate.getName() != null) {
             professional.setName(partialUpdate.getName());
         }
@@ -48,7 +48,7 @@ public class ProfessionalService {
         if(partialUpdate.getEndat() != null) {
             professional.setEndat(TimeUtil.getTimeFromDate(partialUpdate.getEndat()));
         }
-        if(partialUpdate.getDayofweekList() != null) {
+        if(attribute.equals("dayofweekList")) {
             professional.setDayofweekList(partialUpdate.getDayofweekList());
         }
         if(partialUpdate.isRequiresSpecialtyRoom() != null) {
