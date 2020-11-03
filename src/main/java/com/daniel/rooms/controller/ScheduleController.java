@@ -3,10 +3,7 @@ package com.daniel.rooms.controller;
 import com.daniel.rooms.model.Room;
 import com.daniel.rooms.service.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,8 +19,9 @@ public class ScheduleController {
         this.scheduleService = scheduleService;
     }
 
-    @GetMapping("/")
-    public List<Room> generateSchedule() {
-        return scheduleService.generateWeeklySchedule();
+    @GetMapping("/{day}")
+    public List<Room> generateSchedule(@PathVariable String day) {
+        System.out.println(day);
+        return scheduleService.generateWeeklySchedule(day);
     }
 }
