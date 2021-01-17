@@ -78,7 +78,7 @@ public class DataLoader implements ApplicationRunner {
             professional1.setBeginat("08:00");
             professional1.setEndat("13:00");
             professional1.setIsBusy(false);
-            List<String> daysOfWeekList = new ArrayList<>();
+            Set<String> daysOfWeekList = new HashSet<>();
             daysOfWeekList.add(EDaysOfWeek.Segunda.toString());
             daysOfWeekList.add(EDaysOfWeek.Quarta.toString());
             daysOfWeekList.add(EDaysOfWeek.Sexta.toString());
@@ -89,7 +89,7 @@ public class DataLoader implements ApplicationRunner {
             professional2.setBeginat("08:00");
             professional2.setEndat("14:00");
             professional2.setIsBusy(false);
-            List<String> daysOfWeekList2 = new ArrayList<>();
+            Set<String> daysOfWeekList2 = new HashSet<>();
             daysOfWeekList2.add(EDaysOfWeek.Terça.toString());
             daysOfWeekList2.add(EDaysOfWeek.Quinta.toString());
             professional2.setDayofweekList(daysOfWeekList2);
@@ -99,7 +99,7 @@ public class DataLoader implements ApplicationRunner {
             professional3.setBeginat("08:00");
             professional3.setEndat("17:00");
             professional3.setIsBusy(false);
-            List<String> daysOfWeekList3 = new ArrayList<>();
+            Set<String> daysOfWeekList3 = new HashSet<>();
             daysOfWeekList3.add(EDaysOfWeek.Sábado.toString());
             professional3.setDayofweekList(daysOfWeekList3);
 
