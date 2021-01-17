@@ -29,7 +29,8 @@ public class Room {
     @OneToOne(mappedBy = "room")
     private Professional professional;
 
-    public Room() { }
+    public Room() {
+    }
 
     public Room(String roomName, String unit, String openat, String closeat, boolean specialtyRoom, Professional professional) {
         this.roomName = roomName;
@@ -102,8 +103,8 @@ public class Room {
                 "id=" + id +
                 ", roomName='" + roomName + '\'' +
                 ", unit='" + unit + '\'' +
-                ", openAt=" + openat +
-                ", closeAt=" + closeat +
+                ", openat='" + openat + '\'' +
+                ", closeat='" + closeat + '\'' +
                 ", specialtyRoom=" + specialtyRoom +
                 ", professional=" + professional +
                 '}';

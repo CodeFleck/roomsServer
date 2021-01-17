@@ -3,8 +3,9 @@ package com.daniel.rooms.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Professional {
@@ -29,7 +30,7 @@ public class Professional {
     private Room room;
 
     @ElementCollection
-    private List<String> dayofweekList = new ArrayList<>();
+    private Set<String> dayofweekList = new HashSet<>();
 
     private boolean requiresSpecialtyRoom;
 
@@ -37,7 +38,7 @@ public class Professional {
 
     public Professional() { }
 
-    public Professional(String name, String beginAt, String endat, List<String> daysOfWeek, boolean requiresSpecialtyRoom) {
+    public Professional(String name, String beginAt, String endat, Set<String> daysOfWeek, boolean requiresSpecialtyRoom) {
         this.name = name;
         this.beginat = beginAt;
         this.endat = endat;
@@ -78,11 +79,11 @@ public class Professional {
         this.endat = endat;
     }
 
-    public List<String> getDayofweekList() {
+    public Set<String> getDayofweekList() {
         return dayofweekList;
     }
 
-    public void setDayofweekList(List<String> dayofweekList) {
+    public void setDayofweekList(Set<String> dayofweekList) {
         this.dayofweekList = dayofweekList;
     }
 
